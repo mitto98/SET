@@ -30,6 +30,13 @@ double timespec_delta2milliseconds(struct timespec *last,
  ***/
 
 /*** TO BE DONE START ***/
+#ifdef DEBUG
+	struct timespec result;
+	result.tv_sec = last->tv_sec - previous->tv_sec;
+	result.tv_nsec = last->tv_nsec - previous->tv_nsec;
+	debug("1)diffsec: %ld, diffnsec: %ld, diffmillisec: %lg\n", result.tv_sec, result.tv_nsec, (result.tv_nsec / 1.0e6));
+	debug("2)diff: %lg\n", (((double)last->tv_nsec-previous->tv_nsec)/1000000));
+#endif
 	return (((double)last->tv_nsec-previous->tv_nsec)/1000000);
 /*** TO BE DONE END ***/
 
@@ -89,8 +96,12 @@ void print_statistics(FILE * outf, const char *name, int repeats,
 	fprintf(outf, "RTT : percentile 10: %lg, median: %lg, percentile 90: %lg, average: %lg, variance: %lg\n\n", rtt[p10], rtt[median], rtt[p90], mean, var);
 	fprintf(outf, "RTT histogram:\n");
 	/*** TO BE DONE START ***/
-	for (j = 0; j < N_HISTOGRAM_ITEMS; j++)
+	for (j = 0; j < N_HISTOGRAM_ITEMS; j++) {
 		printf("%d\n", histogram[j]);
+		// for(i = 0; i < histogram[j]; i++)
+		// 	printf("*");
+		// printf("\n");
+	}
 	/*** TO BE DONE END ***/
 	
 	if (mean > 0.0)

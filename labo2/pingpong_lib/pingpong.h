@@ -41,7 +41,7 @@
 #include <netinet/udp.h>
 #include <assert.h>
 
-#define DEBUG 1
+// #define DEBUG 1
 
 #define MINREPEATS 151		/* Min number of tests */
 #define REPEATS 501		/* Default number of tests */
