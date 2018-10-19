@@ -43,6 +43,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int tcp_sock
     /*** Store the current time in send_time ***/
 /*** TO BE DONE START ***/
 	timespec_get(&send_time, TIME_UTC);
+	debug("send_time: %lld.000000%.9ld\n", (long long) send_time.tv_sec, send_time.tv_nsec);
 /*** TO BE DONE END ***/
 
     /*** Send the message through the socket ***/
@@ -60,6 +61,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int tcp_sock
     /*** Store the current time in recv_time ***/
 /*** TO BE DONE START ***/
 	timespec_get(&recv_time, TIME_UTC);
+	debug("recv_time: %lld.000000%.9ld\n", (long long) recv_time.tv_sec, recv_time.tv_nsec);
 /*** TO BE DONE END ***/
 
 	printf("tcp_ping received %zd bytes back\n", recv_bytes);
@@ -92,7 +94,7 @@ int main(int argc, char **argv)
 /*** TO BE DONE START ***/
 	gai_hints.ai_family = AF_INET;
 	gai_hints.ai_socktype = SOCK_STREAM;
-	gai_hints.ai_flags = AI_PASSIVE;
+	// gai_hints.ai_flags = AI_PASSIVE;
 	gai_hints.ai_protocol = IPPROTO_TCP;
 /*** TO BE DONE END ***/
 
