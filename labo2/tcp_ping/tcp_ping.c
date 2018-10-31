@@ -42,7 +42,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int tcp_sock
 
     /*** Store the current time in send_time ***/
 /*** TO BE DONE START ***/
-	timespec_get(&send_time, TIME_UTC);
+	clock_gettime(CLOCK_TYPE, &send_time);
 /*** TO BE DONE END ***/
 
     /*** Send the message through the socket ***/
@@ -59,7 +59,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int tcp_sock
 
     /*** Store the current time in recv_time ***/
 /*** TO BE DONE START ***/
-	timespec_get(&recv_time, TIME_UTC);
+	clock_gettime(CLOCK_TYPE, &recv_time);
 /*** TO BE DONE END ***/
 
 	printf("tcp_ping received %zd bytes back\n", recv_bytes);
