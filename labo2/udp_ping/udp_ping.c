@@ -48,7 +48,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 	/*** Store the current time in send_time ***/
 /*** TO BE DONE START ***/
 
-		clock_gettime(CLOCK_REALTIME, &send_time);
+		clock_gettime(CLOCK_TYPE, &send_time);
 		debug("send_time: %lld.000000%.9ld\n", (long long) send_time.tv_sec, send_time.tv_nsec);
 
 /*** TO BE DONE END ***/
@@ -72,7 +72,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 	/*** Store the current time in recv_time ***/
 /*** TO BE DONE START ***/
 
-		clock_gettime(CLOCK_REALTIME, &recv_time);
+		clock_gettime(CLOCK_TYPE, &recv_time);
 		debug("recv_time: %lld.000000%.9ld\n", (long long) recv_time.tv_sec, recv_time.tv_nsec);
 
 /*** TO BE DONE END ***/
