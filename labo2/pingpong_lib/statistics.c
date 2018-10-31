@@ -30,14 +30,16 @@ double timespec_delta2milliseconds(struct timespec *last,
  ***/
 
 /*** TO BE DONE START ***/
-#ifdef DEBUG
-	struct timespec result;
-	result.tv_sec = last->tv_sec - previous->tv_sec;
-	result.tv_nsec = last->tv_nsec - previous->tv_nsec;
-	debug("1)diffsec: %ld, diffnsec: %ld, diffmillisec: %lg\n", result.tv_sec, result.tv_nsec, (result.tv_nsec / 1.0e6));
-	debug("2)diff: %lg\n", (((double)last->tv_nsec-previous->tv_nsec)/1000000));
-#endif
-	return (((double)last->tv_nsec-previous->tv_nsec)/1000000);
+	double deltaMs;
+	//Sec diff
+	deltaMs = ((double)last->tv_sec - previous->tv_sec)*1000;
+	//nSec diff
+	deltaMs += ((double)last->tv_nsec - previous->tv_nsec)/1000000;
+
+	if (deltaMs<0)
+		debug("\n\n--------\n\n");
+
+	return deltaMs;
 /*** TO BE DONE END ***/
 
 }
