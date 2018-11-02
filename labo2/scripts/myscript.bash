@@ -87,6 +87,6 @@ gnuplot <<-eNDuDPgNUPLOTcOMMAND
     set xlabel "msg size (B)"
     set ylabel "throughput (KB/s)"
     lbf(x) = x / ( $L0 + x / $B )
-    plot "$tcp_throughput" using 1:3 title "udp ping-pong Throughput" with linespoints, \
+    plot "$udp_throughput" using 1:3 title "udp ping-pong Throughput" with linespoints, \
         lbf(x) title "Latency-Bandwidth model with L=$L0 and B=$B with linespoints"
 eNDuDPgNUPLOTcOMMAND
