@@ -27,14 +27,8 @@ declare -a B
 first_line="$(head -n 1 ${tcp_throughput})"
 last_line="$(tail -n 1 ${tcp_throughput})"
 
-# echo $first_line
-# echo $last_line
-
 n1=`echo "$first_line" | awk -F" " '{print $1}'`
 n2=`echo "$last_line" | awk -F" " '{print $1}'`
-
-# echo "n1=$n1"
-# echo "n2=$n2"
 
 tn1=`echo "$first_line" | awk -F" " '{print $3}'`
 tn2=`echo "$last_line" | awk -F" " '{print $3}'`
@@ -43,14 +37,10 @@ tn2=`echo "$last_line" | awk -F" " '{print $3}'`
 dn1=`echo "$n1/$tn1" | bc -l`
 dn2=`echo "$n2/$tn2" | bc -l`
 
-# echo "dn1=$dn1"
-# echo "dn2=$dn2"
-
+# B = (N2-N1) / (DN2-DN1)
 B=`echo "($n2-$n1)/($dn2-$dn1)" | bc -l`
+#L0 = (DN1*N2 - DN2*N1) / N2-N1
 L0=`echo "($dn1*$n2-$dn2*$n1)/($n2-$n1)" | bc -l`
-
-# echo "B=$B"
-# echo "L0=$L0"
 
 gnuplot <<-eNDtCPgNUPLOTcOMMAND
     set term png size 1024, 700
