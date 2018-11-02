@@ -56,7 +56,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 	/*** Send the message through the socket (non blocking mode) ***/
 /*** TO BE DONE START ***/
 
-	sent_bytes = send(ping_socket, message, msg_size, MSG_DONTWAIT);
+	sent_bytes = send(ping_socket, message, msg_size, 0);
 	if (sent_bytes < 0)
 		fail_errno("UDP Ping error while sending data");
 
@@ -66,6 +66,8 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 /*** TO BE DONE START ***/
 
 		recv_bytes = recv(ping_socket, answer_buffer, sizeof(answer_buffer), 0);
+		if (recv_bytes < 0)
+			debug("recv_bytes < 0\n");
 
 /*** TO BE DONE END ***/
 
