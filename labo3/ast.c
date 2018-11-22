@@ -283,36 +283,32 @@ char *find_in_path(const char *path, const char *name)
 	 * corrispondente al comando digitato e, se lo si trova, restituire il path completo.
 	 * In caso contrario, restituire NULL */
 
-/*** TO BE DONE START ***/
-	if (strchr(name, '/')) return my_strdup(name);
+/*** TO BE DONE START ***/                                
+	int start = 0, path_size, size;
+	char *next = NULL, *command = NULL;
 
-	char *curr = my_malloc(strlen(path)+1);
-	strncpy(curr, path, strlen(path));
-	strcat(curr, ":");
-	// printf("%s\n",curr);
-
-	char *next, *command;
-	int size, ppath_size;
+	if (strchr(name, '/'))
+		return my_strdup(name);
 
 	while (1) {
-		next = strchr(curr, ':');
+		next = strchr((path+start), ':');
 		if (!next) break;
-		ppath_size = next-curr;
-		size = ppath_size + 2 + strlen(name);
+		path_size = next - (path+start);
+		size = path_size + 2 + strlen(name);
 		command = my_malloc(size);
 		memset(command, 0, size);
-		strncpy(command, curr, ppath_size);
+		strncpy(command, (path+start), path_size);
 		strcat(command, "/");
 		strcat(command, name);
 
-		// printf("%s\n", command);
-		if(!access(command, F_OK)) {
+		if (!access(command, F_OK))
 			return command;
-		}
 
-		curr = next+1;
+		start += path_size+1;
+		free(command);
 	}
 
+	free(command);
 	/*** TO BE DONE END ***/
 	fprintf(stderr, "%s : command not found.\n", name);
 	return NULL;
