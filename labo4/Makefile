@@ -2,10 +2,10 @@
 CFLAGS= -DHTML_404='"404_Not_Found.html"' \
         -DHTML_501='"501_Method_Not_Implemented.html"' \
         -DIMAGE='"uncadunca.jpg"' \
-        -DSTYLE='"000_style.css"'
+        -DSTYLE='"000_style.css"' \
+		-DINCaPACHE_3_1 \
+		-DDEBUG \
 	# -DPRETEND_TO_BE_ROOT \
-	# -DINCaPACHE_3_1 \
-	# -DDEBUG \
 	# -g3 -O0 -Wall -pedantic
 OBJS=aux.o http.o main.o threads.o
 BIN_DIR=bin

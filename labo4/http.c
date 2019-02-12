@@ -345,7 +345,7 @@ void manage_http_requests(int client_fd
 /*** TO BE DONE 3.0 START ***/
 					//incApache solo un cookie capire :-| Ugh!
 					option_val = strtok_r(NULL, "=", &strtokr_save);
-					if(strcmp(option_val, " UserID")==0) {
+					if(strcmp(option_val, " UserID")==0) { //Controllare che ci sia la data
 						option_val = strtok_r(NULL, "\r\n", &strtokr_save);
 						UIDcookie = atoi(option_val);
 					}
