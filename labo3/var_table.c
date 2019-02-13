@@ -61,18 +61,19 @@ char **vt_to_envp(const struct var_table * const this) {
 
 	env = my_malloc((this->len*2+1) * sizeof(char *));
 
-	for (i = 0; i < this->len*2; i+=2, v++) {
-		env[i] = my_strdup(v->name);
-		env[i+1] = my_strdup(v->value);
+	for (i = 0; i < this->len; ++i, ++v) {
+		env[i] = my_malloc(strlen(v->name)+strlen(v->value)+2);
+		strcpy(env[i], v->name);
+		strcat(env[i], "=");
+		strcat(env[i], v->value);
 	}
-
-	env[this->len*2] = NULL;
+	env[this->len] = NULL;
 
 #ifdef DEBUG
 	printf ("--------START DEBUG vt_to_envp--------\n");
-	printf("len: %ld\n", this->len*2+1);
-	for (i = 0; i < this->len*2; i+=2) {
-		printf("i: %d, name: %s, value: %s\n", i, env[i], env[i+1]);
+	printf("len: %ld\n", this->len);
+	for (i = 0; i < this->len; ++i) {
+		printf("env[%d]: %s\n", i, env[i]);
 	}
 	printf ("--------END DEBUG vt_to_envp--------\n");
 #endif
