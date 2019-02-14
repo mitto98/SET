@@ -51,7 +51,7 @@ time_t my_timegm(struct tm *tm)
                time_t ret;
 
 /*** TO BE DONE 3.0 START ***/
-	ret = timegm(tm);
+	ret = mktime(tm);
 	if(ret==-1)
 		fail("Cannot convert time to epoch time");
 /*** TO BE DONE 3.0 END ***/
