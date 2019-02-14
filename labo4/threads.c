@@ -95,8 +95,9 @@ void join_all_threads(int conn_no)
 
 		pthread_mutex_lock(&threads_mutex);
 		to_join[conn_no] = NULL;
-		++no_free_threads;
 		--no_response_threads[conn_no];
+		if(no_response_threads[conn_no]) //Se ==0 si trattava del thread riservato
+			++no_free_threads;
 		connection_no[i] = FREE_SLOT;
 		pthread_mutex_unlock(&threads_mutex);
 
@@ -144,8 +145,10 @@ void join_prev_thread(int thrd_no)
 		conn_no = connection_no[i]; //Getting the connection idx
 		//Updating shared vars
 		to_join[thrd_no] = NULL;
-		++no_free_threads;
 		--no_response_threads[conn_no]; 
+		if(no_response_threads[conn_no]) //Se ==0 si trattava del thread riservato
+			++no_free_threads;
+
 		connection_no[i] = FREE_SLOT;
 		pthread_mutex_unlock(&threads_mutex);
 	} else {
