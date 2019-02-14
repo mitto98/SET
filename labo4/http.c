@@ -359,8 +359,9 @@ void manage_http_requests(int client_fd
 					if((strcmp(option_name, "If-Modified-Since")) == 0){
 						option_val = strtok_r(NULL, "\r\n", &strtokr_save);
 						if(strptime(option_val, " %a, %d %b %Y %T GMT", &since_tm) == NULL)
-							fail_errno("Error during strptime");
-						http_method |= METHOD_CONDITIONAL;		//Set METHOD_CONDITIONAL
+							debug("... If-Modified-Since bad date");
+						else
+							http_method |= METHOD_CONDITIONAL;		//Set METHOD_CONDITIONAL
 					}
 /*** TO BE DONE 3.0 END ***/
 
