@@ -290,9 +290,13 @@ char *find_in_path(const char *path, const char *name)
 	if (strchr(name, '/'))
 		return my_strdup(name);
 
+
 	while (1) {
 		next = strchr((path+start), ':');
-		if (!next) break;
+		if (!next) {
+			next = strchr((path+start), 0);
+			if (!next) break;
+		}
 		path_size = next - (path+start);
 		size = path_size + 2 + strlen(name);
 		command = my_malloc(size);
