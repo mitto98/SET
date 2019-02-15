@@ -134,10 +134,11 @@ int prepare_udp_socket(char *pong_addr, char *pong_port)
 
     /*** call getaddrinfo() in order to get Pong Server address in binary form ***/
 /*** TO BE DONE START ***/
-
-	if (getaddrinfo(pong_addr, pong_port, &gai_hints, &pong_addrinfo) != 0)
-		fail_errno("Failed to get addr info of server(UDP)");
-
+	if (gai_rv=getaddrinfo(pong_addr, pong_port, &gai_hints, &pong_addrinfo)) {
+		if(gai_rv==EAI_SYSTEM)
+			fail_errno("Failed to get addr info of server(UDP)");
+		fail(gai_strerror(gai_rv));
+	}
 /*** TO BE DONE END ***/
 
 #ifdef DEBUG
@@ -200,10 +201,11 @@ int main(int argc, char *argv[])
 
     /*** call getaddrinfo() in order to get Pong Server address in binary form ***/
 /*** TO BE DONE START ***/
-
-	if (getaddrinfo(argv[1], argv[2], &gai_hints, &server_addrinfo) != 0)
-		fail_errno("Failed to get addr info of the server");
-
+	if (gai_rv=getaddrinfo(argv[1], argv[2], &gai_hints, &server_addrinfo)) {
+		if(gai_rv==EAI_SYSTEM)
+			fail_errno("Failed to get addr info of server(UDP)");
+		fail(gai_strerror(gai_rv));
+	}
 /*** TO BE DONE END ***/
 
     /*** Print address of the Pong server before trying to connect ***/

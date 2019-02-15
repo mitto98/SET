@@ -118,8 +118,11 @@ int open_udp_socket(int *pong_port)
 		sprintf(port_number_as_str, "%d", port_number);
 
 /*** TO BE DONE START ***/		
-		if (getaddrinfo(NULL, port_number_as_str, &gai_hints, &pong_addrinfo) != 0)
-			fail_errno("Failed to get addr info of server(UDP)");
+		if (gai_rv=getaddrinfo(NULL, port_number_as_str, &gai_hints, &pong_addrinfo)) {
+			if(gai_rv==EAI_SYSTEM)
+				fail_errno("Failed to get addr info of server");
+			fail(gai_strerror(gai_rv));
+		}
 
 		//creating the socket
 		udp_socket = socket(gai_hints.ai_family, gai_hints.ai_socktype, gai_hints.ai_protocol); 
@@ -278,9 +281,11 @@ int main(int argc, char **argv)
 	gai_hints.ai_protocol = IPPROTO_TCP;
 
 /*** TO BE DONE START ***/
-	if (getaddrinfo(NULL, argv[1], &gai_hints, &server_addrinfo) == -1) 
+	if (gai_rv=getaddrinfo(NULL, argv[1], &gai_hints, &server_addrinfo)) {
+		if(gai_rv==EAI_SYSTEM)
 			fail_errno("Failed to get addr info of server");
-
+		fail(gai_strerror(gai_rv));
+	}
 
 	//creating the socket
 	server_socket = socket(gai_hints.ai_family, gai_hints.ai_socktype, gai_hints.ai_protocol);
