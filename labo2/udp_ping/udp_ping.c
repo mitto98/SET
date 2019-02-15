@@ -246,7 +246,7 @@ int main(int argc, char *argv[])
     /*** Check if the answer is OK, and fail if it is not ***/
 /*** TO BE DONE START ***/
 
-	if (strcmp(answer, "ERROR") == 0)
+	if (strcmp(answer, "OK") != 0)
 		fail_errno("Pong server responded with error");
 
 /*** TO BE DONE END ***/
