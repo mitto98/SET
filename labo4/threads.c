@@ -79,14 +79,6 @@ void join_all_threads(int conn_no)
 /*** TO BE DONE 3.1 START ***/
 	debug("start of join_all_threads(%d)\n", conn_no);
 	if(to_join[conn_no] != NULL){
-		// for(int j=0; j<MAX_THREADS; ++j) {
-		// 	debug("   ...to_join[%2d] dump: ", j)
-		// 	if(to_join[j] != NULL) debug("%ld  -  ", *to_join[j]);
-		// 	else debug("NULL             -  ");
-		// 	if(thread_ids[j] == (pthread_t)NULL) debug("NULL\n");
-		// 	else debug("%ld\n", thread_ids[j]);
-		// } 
-		
 		i = to_join[conn_no] - thread_ids;		
 		debug("   ...joining thread with idx %ld (%ld)\n", i, thread_ids[i]);
 		if(pthread_join(thread_ids[i], NULL)) 
@@ -100,14 +92,6 @@ void join_all_threads(int conn_no)
 			++no_free_threads;
 		connection_no[i] = FREE_SLOT;
 		pthread_mutex_unlock(&threads_mutex);
-
-		// for(int j=0; j<MAX_THREADS; ++j) {
-		// 	debug("   ...to_join[%2d] dump: ", j)
-		// 	if(to_join[j] != NULL) debug("%ld  -  ", *to_join[j]);
-		// 	else debug("NULL             -  ");
-		// 	if(thread_ids[j] == (pthread_t)NULL) debug("NULL\n");
-		// 	else debug("%ld\n", thread_ids[j]);
-		// } 
 	}
 /*** TO BE DONE 3.1 END ***/
 
@@ -127,14 +111,6 @@ void join_prev_thread(int thrd_no)
 	 *** avoiding race conditions ***/
 /*** TO BE DONE 3.1 START ***/
 	debug(" ...watashi wa: %ld, no_free_threads %d\n", pthread_self(), no_free_threads);
-	// for(int j=0; j<MAX_THREADS; ++j) {
-	// 	debug("   ...to_join[%2d] dump: ", j)
-	// 	if(to_join[j] != NULL) debug("%ld  -  ", *to_join[j]);
-	// 	else debug("NULL             -  ");
-	// 	if(thread_ids[j] == (pthread_t)NULL) debug("NULL\n");
-	// 	else debug("%ld\n", thread_ids[j]);
-	// } 
-
 	if(to_join[thrd_no] != NULL) {
 		i = to_join[thrd_no] - thread_ids;
 		debug("   ...joining thread with idx %ld (%ld)\n", i, thread_ids[i]);
