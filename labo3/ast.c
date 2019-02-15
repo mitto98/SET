@@ -307,8 +307,6 @@ char *find_in_path(const char *path, const char *name)
 		start += path_size+1;
 		free(command);
 	}
-
-	free(command);
 	/*** TO BE DONE END ***/
 	fprintf(stderr, "%s : command not found.\n", name);
 	return NULL;
