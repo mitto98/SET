@@ -249,7 +249,7 @@ void send_response(int client_fd, int response_code, int cookie,
 	if(sendfile(client_fd, fd, NULL, file_size) == -1)
 		fail_errno("Failed to send the file");
 	if(close(fd) == -1)
-			fail_errno("Error closing fd");
+		fail_errno("Error closing fd");
 /*** TO BE DONE 3.0 END ***/
 
 	}

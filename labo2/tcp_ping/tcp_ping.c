@@ -98,7 +98,11 @@ int main(int argc, char **argv)
 
     /*** call getaddrinfo() in order to get Pong Server address in binary form ***/
 /*** TO BE DONE START ***/
-	getaddrinfo(argv[1], argv[2], &gai_hints, &server_addrinfo);
+	if (gai_rv=getaddrinfo(argv[1], argv[2], &gai_hints, &server_addrinfo)) {
+		if(gai_rv==EAI_SYSTEM)
+			fail_errno("Failed to get Pong Server address in binary form");
+		fail(gai_strerror(gai_rv));
+	}
 /*** TO BE DONE END ***/
 
     /*** Print address of the Pong server before trying to connect ***/
