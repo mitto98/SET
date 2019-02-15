@@ -66,6 +66,8 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 /*** TO BE DONE START ***/
 
 		recv_bytes = recv(ping_socket, answer_buffer, sizeof(answer_buffer), 0);
+		if (recv_bytes < 0 && errno != EAGAIN && errno != EWOULDBLOCK)
+			fail_errno("UDP ping could not recv from UDP socket");
 		if (recv_bytes < 0)
 			debug("recv_bytes < 0\n");
 
