@@ -358,11 +358,14 @@ void manage_http_requests(int client_fd
 				 *** and possibly add METHOD_CONDITIONAL flag to http_method
 /*** TO BE DONE 3.0 START ***/
 					if((strcmp(option_name, "If-Modified-Since")) == 0){
+						
 						option_val = strtok_r(NULL, "\r\n", &strtokr_save);
-						if(strptime(option_val, " %a, %d %b %Y %T GMT", &since_tm) == NULL)
-							debug("... If-Modified-Since bad date");
-						else
-							http_method |= METHOD_CONDITIONAL;		//Set METHOD_CONDITIONAL
+						if(option_val!=NULL) {
+							if(strptime(option_val, " %a, %d %b %Y %T GMT", &since_tm) == NULL) 
+								debug("... If-Modified-Since bad date");
+							else
+								http_method |= METHOD_CONDITIONAL;		//Set METHOD_CONDITIONAL
+						}
 					}
 /*** TO BE DONE 3.0 END ***/
 
